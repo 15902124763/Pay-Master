@@ -1,32 +1,26 @@
 package com.yarm.pay.pojo.dao;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created with IDEA
  * author:Yarm.Yang
- * Date:2019/6/10
- * Time:20:47
+ * Date:2019/6/11
+ * Time:14:48
  * Des:
  */
 @Entity
-@Table(name = "pay_merchant")
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "pay_merchant", schema = "pay", catalog = "")
 public class PayMerchantDO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//支持mysql主键自增长
     private int id;
-    @Column(name = "name", nullable = false,columnDefinition = "varchar(255) COMMENT '商户名'")
+    private String apiKey;
+    private String merchantId;
     private String name;
-    @Column(name = "status", nullable = false, columnDefinition = "TINYINT(4) COMMENT '1正常，2,不可用'")
-    private int status; // 1正常，2 不可用
-    @Column(name = "merchant_id", nullable = false,columnDefinition = "varchar(19) COMMENT '商户Id'")
-    private String merchantId; // 商户Id
-    @Column(name = "api_key", nullable = false,columnDefinition = "varchar(32) COMMENT '秘钥'")
-    private String apiKey; // 秘钥
+    private Byte status;
 
+    @Id
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -35,22 +29,18 @@ public class PayMerchantDO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    @Basic
+    @Column(name = "api_key")
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
+    @Basic
+    @Column(name = "merchant_id")
     public String getMerchantId() {
         return merchantId;
     }
@@ -59,11 +49,40 @@ public class PayMerchantDO {
         this.merchantId = merchantId;
     }
 
-    public String getApiKey() {
-        return apiKey;
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Basic
+    @Column(name = "status")
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PayMerchantDO that = (PayMerchantDO) o;
+        return id == that.id &&
+                Objects.equals(apiKey, that.apiKey) &&
+                Objects.equals(merchantId, that.merchantId) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(status, that.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, apiKey, merchantId, name, status);
     }
 }
