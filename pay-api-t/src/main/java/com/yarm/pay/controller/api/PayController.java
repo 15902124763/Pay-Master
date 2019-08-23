@@ -38,7 +38,7 @@ public class PayController {
         tagMap.put("req", reqData);
         logger.info("支付入参" + gson.toJson(tagMap));
 
-        payService.aliPay(reqData);
+//        payService.aliPay(reqData);
 
         tagMap.put("rep", "");
         logger.info("支付返回" + gson.toJson(tagMap));

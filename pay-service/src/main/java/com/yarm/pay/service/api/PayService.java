@@ -10,5 +10,5 @@ import com.yarm.pay.pojo.api.request.RequestQuery;
  * Des:
  */
 public interface PayService {
-    void aliPay(RequestQuery requestQuery);
+    void pay(RequestQuery requestQuery);
 }

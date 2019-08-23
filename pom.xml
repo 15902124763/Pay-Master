@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>pay-api</module>
+        <module>pay-api-t</module>
         <module>pay-service</module>
         <module>pay-pojo</module>
         <module>pay-dao</module>
@@ -124,6 +124,11 @@
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hds</groupId>
+            <artifactId>hds-job-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
